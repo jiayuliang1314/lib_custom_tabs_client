@@ -1,0 +1,3 @@
+rootProject.name='DemoOfCustomTabsClient'
+include ':app'
+include ':lib_custom_tabs_client'

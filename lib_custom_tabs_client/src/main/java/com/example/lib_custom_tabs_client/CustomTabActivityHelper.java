@@ -21,11 +21,10 @@ public class CustomTabActivityHelper implements ServiceConnectionCallback {
     private CustomTabsSession mCustomTabsSession;
 
     /**
-     *
-     * @param link link
+     * @param link         link
      * @param context
-     * @param in anim
-     * @param out anim
+     * @param in           anim
+     * @param out          anim
      * @param toolbarcolor color
      */
     public static void open(String link, Activity context, int in, int out, int toolbarcolor) {
@@ -40,6 +39,15 @@ public class CustomTabActivityHelper implements ServiceConnectionCallback {
                 activity.startActivity(new Intent("android.intent.action.VIEW", uri));
             }
         });
+    }
+
+    public static void open(String link, Activity context, int in, int out, int toolbarcolor, CustomTabActivityHelper.CustomTabFallback customTabFallback) {
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        builder.addDefaultShareMenuItem();
+        builder.setToolbarColor(toolbarcolor);
+        builder.setShowTitle(true);
+        builder.setStartAnimations(context, in, out);
+        CustomTabActivityHelper.openCustomTab(context, builder.build(), Uri.parse(link), customTabFallback);
     }
 
     private static void openCustomTab(Activity activity, CustomTabsIntent customTabsIntent, Uri uri, CustomTabFallback customTabFallback) {
